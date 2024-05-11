@@ -17,8 +17,6 @@ def create_app(config_class=Config):
     db.init_app(app)
     ma.init_app(app)
 
-    db.create_all()
-
     with app.app_context():
         db.create_all()
 
@@ -36,5 +34,8 @@ def create_app(config_class=Config):
             current_app.root_path, "../", app.config["UPLOAD_FOLDER"]
         )
         return send_from_directory(uploads, filename)
+
+    with app.app_context():
+        db.create_all()
 
     return app
