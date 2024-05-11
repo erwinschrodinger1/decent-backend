@@ -17,6 +17,8 @@ def create_app(config_class=Config):
     db.init_app(app)
     ma.init_app(app)
 
+    db.create_all()
+
     with app.app_context():
         db.create_all()
 
